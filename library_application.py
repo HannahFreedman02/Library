@@ -2,7 +2,8 @@ from library_definitions import Book
 from library_definitions import Customer
 from library_definitions import Library
 
-
+'''
+'''
 class Application:
 
     '''
@@ -23,7 +24,7 @@ class Application:
             print('6 Find a book by name of author')
             print('7 Find a customer')
             print('8 Add a book to a customers account')
-            print('9 Print all books for a customer')
+            print('9 Print all books of customer')
             print('-1 Leave Library')
             print('\n')
 
@@ -46,26 +47,64 @@ class Application:
                 self.library.printAllCustomers()
 
             elif userInput == '5':
-                book = self.library.findBookByName()
+                print('\nPlease enter title of book: ')
+                bookName = input()
+                book = self.library.findBookByName(bookName)
                 if book == None:
                     print('Book not found!')
                 else:
-                    print(book.bookName)
+                    print(book.bookName + ' by ' + book.author.authorFullName)
 
             elif userInput == '6':
-                book = self.library.findBookByAuthor()
+                print('\nPlease enter name of author: ')
+                authorFullName = input()
+                book = self.library.findBookByAuthor(authorFullName)
                 if book == None:
                     print('Book not found!')
                 else:
-                    print(book.authorName)
+                    print(book.bookName + ' by ' + book.author.authorFullName)
 
             elif userInput == '7':
-                customer = self.library.findCustomer()
+                print('\nPlease enter customers full name: ')
+                customerFullName = input()
+                customer = self.library.findCustomer(customerFullName)
                 if customer == None:
                     print('Customer not found!')
+                else:
+                    print(customer.customerFullName)
 
             elif userInput == '8':
-                self.library.addBookToCustomer()
+                print('\nPlease enter the name of the book you would like to add: ')
+                bookName = input()
+                print('\nPlease enter the name of the cutomer you would like to add the book to: ')
+                customerFullName = input()
+                book = self.library.findBookByName(bookName)
+                if book == None:
+                    print('Book not found!')
+                else:
+                    customer = self.library.findCustomer(customerFullName)
+                    if customer == None:
+                        print('Customer not found!')
+                    else:
+                        customer.addBookToCustomer(book)                        
+            
+            elif userInput == '9':
+                print('\nPlease enter name of customer: ')
+                customerFullName = input()
+                customer = self.library.findCustomer(customerFullName)
+                if customer == None:
+                    print('Customer not found!')
+                else:
+                    listOfBooks = customer.getListOfBooks()
+                    self.printAllBooksOfCustomer(listOfBooks)
+
+                    
 
 
-           
+    '''
+    '''
+    def printAllBooksOfCustomer(self, p_listOfBooks):
+        print('Here are your list of books: ')
+        for book in p_listOfBooks:
+            print(book.bookName)
+

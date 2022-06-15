@@ -1,5 +1,8 @@
 
+'''
+'''
 class Library:
+
 
     '''
     '''
@@ -30,6 +33,8 @@ class Library:
         author = Author(authorFirstName, authorLastName)
         book = Book(bookName, author)
         self.listOfBooks.append(book)
+        self.listOfBooks.append(author)
+        
 
 
     '''
@@ -44,7 +49,6 @@ class Library:
         lastName = names[1]
     
         self.listOfCustomers.append(Customer(firstName, lastName))
-
 
 
     '''
@@ -65,25 +69,48 @@ class Library:
 
     '''
     '''
-    def findBookByName(self):
-        print('\nPlease enter title of book: ')
-        bookName = input()
+    def findBookByName(self, p_bookName):
         for book in self.listOfBooks:
-            if bookName == book.bookName:
+            if p_bookName == book.bookName:
                 return book
-            return None
+        return None
+
+    
+    '''
+    '''
+    def findBookByAuthor(self, p_authorFullName):
+        for book in self.listOfBooks:
+            if p_authorFullName == book.author.authorFullName:
+                return book
+        return None
 
 
+    '''
+    '''
+    def findCustomer(self, p_customerFullName):
+        for customer in self.listOfCustomers:
+            if p_customerFullName == customer.customerFullName:
+                return customer
+        return None
+
+
+'''
+'''
 class Book:
+
 
     '''
     '''
     def __init__(self, p_bookName, p_authorObject):
         self.bookName = p_bookName
         self.author = p_authorObject
+        
 
 
+'''
+'''
 class Author:
+
 
     '''
     '''
@@ -91,14 +118,11 @@ class Author:
         self.authorFirstName = p_authorFirstName
         self.authorLastName = p_authorLastName
         self.authorFullName = self.authorFirstName + ' ' + self.authorLastName
-    
+       
 
 '''
 '''
 class Customer:
-
-    def addBookToCustomer(self, customer):
-        self.listOfBooks.append(customer)
 
 
     '''
@@ -107,3 +131,17 @@ class Customer:
         self.firstName = p_firstName
         self.lastName = p_lastName
         self.customerFullName = self.firstName + ' ' + self.lastName
+        self.listOfBooks = []
+    
+
+    '''
+    '''
+    def addBookToCustomer(self, p_book):
+        self.listOfBooks.append(p_book)
+
+
+    '''
+    '''
+    def getListOfBooks(self):
+        return self.listOfBooks
+
