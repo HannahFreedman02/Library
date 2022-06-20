@@ -33,7 +33,6 @@ class Library:
         author = Author(authorFirstName, authorLastName)
         book = Book(bookName, author)
         self.listOfBooks.append(book)
-        self.listOfBooks.append(author)
         
 
 
